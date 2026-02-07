@@ -2,19 +2,19 @@ import {
   ProfileHeader,
   SaveContactCard,
   ActionCard,
-  PhoneIcon,
   WhatsAppIcon,
   EmailIcon,
   FacebookIcon,
-  LocationCard,
-  ServicesCard,
-  BankDetailsCard,
   SocialLinks,
   LinkedInIcon,
   InstagramIcon,
   TwitterIcon,
   YouTubeIcon,
   FloatingDock,
+  PhoneCard,
+  BankButton,
+  LocationButton,
+  ServicesButton,
 } from "@/components";
 
 // Social links configuration
@@ -75,22 +75,30 @@ export default function Home() {
 
         {/* 2 Column Grid for Primary Actions */}
         <div className="grid grid-cols-2 gap-3">
-          <ActionCard
-            href="tel:+919428010011"
-            customIcon={<PhoneIcon />}
-            label="Mobile"
-            value="+91 94280 10011"
+          <PhoneCard
+            phoneNumbers={[
+              {
+                label: "Primary",
+                number: "+919428010011",
+                displayNumber: "+91 94280 10011",
+              },
+              {
+                label: "Alternative",
+                number: "+919723600001",
+                displayNumber: "+91 97236 00001",
+              },
+            ]}
             colorScheme="green"
           />
           <ActionCard
-            href="https://wa.me/919723600001"
+            href="https://wa.me/919428010011"
             customIcon={<WhatsAppIcon />}
             label="WhatsApp"
             value="Chat Now"
             colorScheme="teal"
           />
           <ActionCard
-            href="mailto:satyamenterpris02@gmail.com"
+            href="mailto:satyamenterprise02@gmail.com"
             customIcon={<EmailIcon />}
             label="Email"
             value="Send Mail"
@@ -103,28 +111,19 @@ export default function Home() {
             value="Follow Us"
             colorScheme="blue"
           />
+          <BankButton bankDetails={bankDetails} />
+          <LocationButton
+            address="FF-60, Samruddhi Bhavan, 3rd Floor"
+            city="Opp. Bombay Petrol Pump, Gondal Road, Rajkot - 360002"
+            embedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.859723318689!2d70.79667707533606!3d22.28330297969886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959ca126519b81f%3A0xd513a203a82dec4b!2sSamrudhi%20Bhawan!5e0!3m2!1sen!2sin!4v1770473441475!5m2!1sen!2sin"
+            latitude={22.283303}
+            longitude={70.799252}
+          />
+          <ServicesButton />
         </div>
-
-        {/* Services Card */}
-        <ServicesCard
-          title="Our Services"
-          description="Industrial machinery & hardware solutions."
-        />
-
-        {/* Bank Details Card */}
-        <BankDetailsCard bankDetails={bankDetails} />
 
         {/* Save Contact Card */}
         {/* <SaveContactCard /> */}
-
-        {/* Location Card */}
-        <LocationCard
-          address="FF-60, Samruddhi Bhavan, 3rd Floor"
-          city="Opp. Bombay Petrol Pump, Gondal Road, Rajkot - 360002"
-          embedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.859723318689!2d70.79667707533606!3d22.28330297969886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959ca126519b81f%3A0xd513a203a82dec4b!2sSamrudhi%20Bhawan!5e0!3m2!1sen!2sin!4v1770473441475!5m2!1sen!2sin"
-          latitude={22.283303}
-          longitude={70.799252}
-        />
 
         {/* Social Media Links */}
         {/* <SocialLinks links={socialLinks} /> */}

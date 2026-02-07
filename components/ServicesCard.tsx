@@ -17,18 +17,17 @@ interface ServicesCardProps {
 }
 
 const defaultServices: Service[] = [
-  { name: "Workshop Machinery", icon: "precision_manufacturing" },
-  { name: "Wood Working Machinery", icon: "carpenter" },
-  { name: "Electric Machinery", icon: "electric_bolt" },
-  { name: "M.S. & S.S. Hardware", icon: "hardware" },
-  { name: "Spares & Parts", icon: "settings" },
-  { name: "Repairing & Jobwork", icon: "build" },
   { name: "Air Compressor", icon: "air" },
   { name: "Service Pump", icon: "water_pump" },
   { name: "Electric Blower", icon: "mode_fan" },
+  { name: "Oil Level Indicator", icon: "oil_barrel" },
   { name: "Vulcanizing Machine", icon: "local_fire_department" },
   { name: "Electric Motor", icon: "electric_meter" },
-  { name: "Oil Level Indicator", icon: "oil_barrel" },
+  { name: "Workshop Machinery", icon: "precision_manufacturing" },
+  { name: "Wood Working Machinery", icon: "carpenter" },
+  { name: "Electric Machinery", icon: "electric_bolt" },
+  { name: "Spares & Parts", icon: "settings" },
+  { name: "Repairing & Jobwork", icon: "build" },
 ];
 
 export function ServicesCard({

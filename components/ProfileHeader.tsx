@@ -20,7 +20,7 @@ export function ProfileHeader({
       {/* Profile Image with Glow Effect */}
       <div className="group relative">
         <div className="absolute -inset-0.5 rounded-full" />
-        <div className="relative h-32 w-32 overflow-hidden rounded-full bg-black p-1">
+        <div className="relative h-40 w-40 overflow-hidden rounded-full  p-1">
           <Image
             src={imageUrl}
             alt={`${title} Portrait`}
@@ -33,12 +33,12 @@ export function ProfileHeader({
       </div>
 
       {/* Profile Info */}
-      <div className="mt-4 space-y-2 text-center">
+      <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold tracking-tight text-white">{title}</h1>
         
         {/* Name with Role Badge */}
         <div className="flex items-center justify-center gap-2">
-          <p className="font-medium text-slate-300">{name}</p>
+          <p className="font-semibold text-lg text-white">{name}</p>
           <span className="text-slate-500">•</span>
           <span className="font-medium text-blue-300">{role}</span>
         </div>
