@@ -19,14 +19,14 @@ export function ProfileHeader({
     <header className="relative flex flex-col items-center px-6 pb-6 pt-12">
       {/* Profile Image with Glow Effect */}
       <div className="group relative">
-        <div className="absolute -inset-0.5 rounded-full bg-linear-to-r from-primary to-purple-600 opacity-10 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200" />
+        <div className="absolute -inset-0.5 rounded-full" />
         <div className="relative h-32 w-32 overflow-hidden rounded-full bg-black p-1">
           <Image
             src={imageUrl}
             alt={`${title} Portrait`}
             width={128}
             height={128}
-            className="h-full w-full rounded-full object-cover pt-[15px]"
+            className="h-full w-full rounded-full object-cover pt-3.75"
             priority
           />
         </div>
