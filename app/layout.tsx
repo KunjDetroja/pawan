@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Satyam Digital Card - Minimal Bento",
-  description: "Digital business card with a modern bento grid design",
+  title: "Satyam Enterprise",
+  description: "Distributor of Oil Level Indicator & Industrial Machinery Solutions.",
 };
 
 export default function RootLayout({
