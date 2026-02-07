@@ -94,7 +94,7 @@ export function Modal({
     >
       <div
         ref={contentRef}
-        className={`relative my-auto max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-2xl border border-white/10 bg-slate-900/95 p-6 shadow-2xl shadow-black/50 transition-all duration-300 ease-out ${
+        className={`relative my-auto flex max-h-[90vh] w-full max-w-sm flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900/95 shadow-2xl shadow-black/50 transition-all duration-300 ease-out ${
           isAnimatingIn
             ? "scale-100 translate-y-0 opacity-100"
             : "scale-95 translate-y-4 opacity-0"
@@ -107,9 +107,9 @@ export function Modal({
           <div className="absolute -bottom-20 -right-20 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
         </div>
 
-        {/* Header */}
+        {/* Sticky Header */}
         {(title || icon) && (
-          <div className="relative mb-5 flex items-center justify-between">
+          <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-slate-900/95 px-6 py-4 backdrop-blur-sm">
             <div className="flex items-center gap-3">
               {icon && (
                 <div
@@ -129,8 +129,8 @@ export function Modal({
           </div>
         )}
 
-        {/* Content */}
-        <div className="relative">{children}</div>
+        {/* Scrollable Content */}
+        <div className="relative flex-1 overflow-y-auto p-6">{children}</div>
       </div>
     </div>
   );
