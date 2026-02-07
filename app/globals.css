@@ -34,12 +34,17 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(45, 55, 72, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 .glass-card:active {
-  background: rgba(30, 41, 59, 0.6);
-  transform: scale(0.98);
-  transition: all 0.1s ease;
+  background: rgba(30, 41, 59, 0.7);
 }
 
 .glass-dock {
@@ -64,4 +69,29 @@ body {
 ::selection {
   background-color: #135bec;
   color: white;
+}
+
+/* Modal Animation Styles */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: background-color 0.3s ease-out, backdrop-filter 0.3s ease-out, -webkit-backdrop-filter 0.3s ease-out;
+}
+
+.modal-overlay.modal-open {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.modal-content {
+  opacity: 0;
+  transform: scale(0.95) translateY(16px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.modal-content.modal-open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }

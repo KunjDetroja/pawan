@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Modal } from "./Modal";
 
 interface BankDetails {
   bankName: string;
@@ -36,17 +37,6 @@ const ChevronRightIcon = () => (
   </svg>
 );
 
-// Close icon component
-const CloseIcon = () => (
-  <svg
-    className="h-5 w-5 fill-current"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-  </svg>
-);
-
 // Copy icon component
 const CopyIcon = () => (
   <svg
@@ -58,24 +48,27 @@ const CopyIcon = () => (
   </svg>
 );
 
+// Check/Tick icon component
+const CheckIcon = () => (
+  <svg
+    className="h-5 w-5 fill-current"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+  </svg>
+);
+
 export function BankDetailsCard({ bankDetails }: BankDetailsCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  const copyToClipboard = (text: string) => {
+  const copyToClipboard = (text: string, field: string) => {
     navigator.clipboard.writeText(text);
-    // You could add a toast notification here
+    setCopiedField(field);
+    setTimeout(() => {
+      setCopiedField(null);
+    }, 2000);
   };
 
   return (
@@ -100,97 +93,89 @@ export function BankDetailsCard({ bankDetails }: BankDetailsCardProps) {
       </button>
 
       {/* Bank Details Modal */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-100 flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm"
-          onClick={() => setIsOpen(false)}
-        >
-          <div
-            className="glass-card my-auto w-full max-w-sm rounded-2xl p-6 max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="mb-5 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
-                  <BankIcon className="h-6 w-6" />
-                </div>
-                <h2 className="text-lg font-bold text-white">Bank Details</h2>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
-              >
-                <CloseIcon />
-              </button>
-            </div>
-
-            {/* Bank Info */}
-            <div className="space-y-4">
-              {/* Bank Name */}
-              <div className="rounded-xl bg-white/5 p-4">
-                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">
-                  Bank
-                </p>
-                <p className="font-semibold text-white">{bankDetails.bankName}</p>
-              </div>
-
-              {/* Account Name */}
-              <div className="rounded-xl bg-white/5 p-4">
-                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">
-                  Account Name
-                </p>
-                <p className="font-semibold text-white">{bankDetails.accountName}</p>
-              </div>
-
-              {/* Account Number - Copyable */}
-              <button
-                onClick={() => copyToClipboard(bankDetails.accountNumber)}
-                className="group flex w-full items-center justify-between rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
-              >
-                <div>
-                  <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">
-                    Account Number
-                  </p>
-                  <p className="font-mono font-semibold text-white">{bankDetails.accountNumber}</p>
-                </div>
-                <span className="text-slate-500 transition-colors group-hover:text-primary">
-                  <CopyIcon />
-                </span>
-              </button>
-
-              {/* Branch */}
-              <div className="rounded-xl bg-white/5 p-4">
-                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">
-                  Branch
-                </p>
-                <p className="font-semibold text-white">{bankDetails.branch}</p>
-              </div>
-
-              {/* IFSC Code - Copyable */}
-              <button
-                onClick={() => copyToClipboard(bankDetails.ifscCode)}
-                className="group flex w-full items-center justify-between rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
-              >
-                <div>
-                  <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">
-                    RTGS/IFSC Code
-                  </p>
-                  <p className="font-mono font-semibold text-white">{bankDetails.ifscCode}</p>
-                </div>
-                <span className="text-slate-500 transition-colors group-hover:text-primary">
-                  <CopyIcon />
-                </span>
-              </button>
-            </div>
-
-            {/* Footer Note */}
-            <p className="mt-4 text-center text-xs text-slate-500">
-              Tap on account number or IFSC to copy
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="Bank Details"
+        icon={<BankIcon className="h-6 w-6" />}
+        iconClassName="bg-emerald-500/20 text-emerald-400"
+      >
+        {/* Bank Info */}
+        <div className="space-y-4">
+          {/* Bank Name */}
+          <div className="rounded-xl bg-white/5 p-4">
+            <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-400">
+              Bank
             </p>
+            <p className="font-semibold text-white">{bankDetails.bankName}</p>
           </div>
+
+          {/* Account Name */}
+          <div className="rounded-xl bg-white/5 p-4">
+            <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-400">
+              Account Name
+            </p>
+            <p className="font-semibold text-white">{bankDetails.accountName}</p>
+          </div>
+
+          {/* Account Number - Copyable */}
+          <button
+            onClick={() => copyToClipboard(bankDetails.accountNumber, "accountNumber")}
+            className="group flex w-full items-center justify-between rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
+          >
+            <div>
+              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-400">
+                Account Number
+              </p>
+              <p className="font-mono font-semibold text-white">{bankDetails.accountNumber}</p>
+            </div>
+            <span
+              className={`transition-all duration-300 ${
+                copiedField === "accountNumber"
+                  ? "scale-110 text-emerald-400"
+                  : "scale-100 text-slate-400 group-hover:text-primary"
+              }`}
+            >
+              {copiedField === "accountNumber" ? <CheckIcon /> : <CopyIcon />}
+            </span>
+          </button>
+
+          {/* Branch */}
+          <div className="rounded-xl bg-white/5 p-4">
+            <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-400">
+              Branch
+            </p>
+            <p className="font-semibold text-white">{bankDetails.branch}</p>
+          </div>
+
+          {/* IFSC Code - Copyable */}
+          <button
+            onClick={() => copyToClipboard(bankDetails.ifscCode, "ifscCode")}
+            className="group flex w-full items-center justify-between rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
+          >
+            <div>
+              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-400">
+                RTGS/IFSC Code
+              </p>
+              <p className="font-mono font-semibold text-white">{bankDetails.ifscCode}</p>
+            </div>
+            <span
+              className={`transition-all duration-300 ${
+                copiedField === "ifscCode"
+                  ? "scale-110 text-emerald-400"
+                  : "scale-100 text-slate-400 group-hover:text-primary"
+              }`}
+            >
+              {copiedField === "ifscCode" ? <CheckIcon /> : <CopyIcon />}
+            </span>
+          </button>
         </div>
-      )}
+
+        {/* Footer Note */}
+        <p className="mt-4 text-center text-xs text-slate-400">
+          Tap on account number or IFSC to copy
+        </p>
+      </Modal>
     </>
   );
 }

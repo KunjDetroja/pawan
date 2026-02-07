@@ -10,6 +10,7 @@ export {
 export { LocationCard } from "./LocationCard";
 export { ServicesCard } from "./ServicesCard";
 export { BankDetailsCard } from "./BankDetailsCard";
+export { Modal } from "./Modal";
 export {
   SocialLinks,
   LinkedInIcon,

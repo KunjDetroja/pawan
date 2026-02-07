@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import { Modal } from "./Modal";
 
 interface Service {
   name: string;
@@ -31,18 +32,6 @@ export function ServicesCard({
   backgroundImage,
 }: ServicesCardProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
 
   return (
     <>
@@ -87,53 +76,33 @@ export function ServicesCard({
       </button>
 
       {/* Services Modal */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-100 flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm"
-          onClick={() => setIsOpen(false)}
-        >
-          <div
-            className="glass-card my-auto w-full max-w-sm rounded-2xl p-6 max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="mb-5 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 text-primary">
-                  <span className="material-symbols-outlined">category</span>
-                </div>
-                <h2 className="text-lg font-bold text-white">{title}</h2>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title={title}
+        icon={<span className="material-symbols-outlined">category</span>}
+        iconClassName="bg-primary/20 text-primary"
+      >
+        {/* Services List */}
+        <div className="space-y-3">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-3 rounded-xl bg-white/5 p-4 transition-colors hover:bg-white/10"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
+                <span className="material-symbols-outlined">{service.icon}</span>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
-              >
-                <span className="material-symbols-outlined text-[20px]">close</span>
-              </button>
+              <p className="font-medium text-white">{service.name}</p>
             </div>
-
-            {/* Services List */}
-            <div className="space-y-3">
-              {services.map((service, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 rounded-xl bg-white/5 p-4"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <span className="material-symbols-outlined">{service.icon}</span>
-                  </div>
-                  <p className="font-medium text-white">{service.name}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Footer */}
-            <p className="mt-4 text-center text-xs text-slate-500">
-              Contact us for more information
-            </p>
-          </div>
+          ))}
         </div>
-      )}
+
+        {/* Footer */}
+        <p className="mt-4 text-center text-xs text-slate-400">
+          Contact us for more information
+        </p>
+      </Modal>
     </>
   );
 }

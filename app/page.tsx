@@ -115,7 +115,7 @@ export default function Home() {
         <BankDetailsCard bankDetails={bankDetails} />
 
         {/* Save Contact Card */}
-        <SaveContactCard />
+        {/* <SaveContactCard /> */}
 
         {/* Location Card */}
         <LocationCard
@@ -127,7 +127,7 @@ export default function Home() {
         />
 
         {/* Social Media Links */}
-        <SocialLinks links={socialLinks} />
+        {/* <SocialLinks links={socialLinks} /> */}
       </main>
 
       {/* Floating Dock */}

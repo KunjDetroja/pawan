@@ -102,11 +102,11 @@ export function ActionCard({
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-      className="glass-card group flex flex-col items-start gap-3 rounded-2xl p-4 transition-all"
+      className="glass-card group relative flex flex-col items-start gap-3 overflow-hidden rounded-2xl p-4"
     >
       <div
         className={cn(
-          "flex items-center justify-center rounded-xl border bg-linear-to-br p-2.5 transition-colors",
+          "relative z-10 flex items-center justify-center rounded-xl border bg-linear-to-br p-2.5 transition-colors duration-300",
           colors.gradient,
           colors.border,
           colors.text,
@@ -119,7 +119,7 @@ export function ActionCard({
           <span className="material-symbols-outlined text-[28px]">{icon}</span>
         )}
       </div>
-      <div>
+      <div className="relative z-10">
         <p className="text-xs font-medium text-slate-400">{label}</p>
         <p className="font-bold tracking-tight text-white">{value}</p>
       </div>
