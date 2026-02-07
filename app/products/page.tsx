@@ -22,11 +22,35 @@ const pumpProducts: Product[] = [
     model: "KE-C3-35",
     litre: "35",
   },
+  {
+    image: "/product/pump/ke-g3-50.jpeg",
+    name: "Pump",
+    model: "KE-G3-50",
+    litre: "50",
+  },
+  {
+    image: "/product/pump/ke-s2-24.jpeg",
+    name: "Pump",
+    model: "KE-S2-24",
+    litre: "24",
+  },
+  {
+    image: "/product/pump/ke-s3-35.jpeg",
+    name: "Pump",
+    model: "KE-S3-35",
+    litre: "35",
+  },
+  {
+    image: "/product/pump/ke-s3-36.jpeg",
+    name: "Pump",
+    model: "KE-S3-36",
+    litre: "36",
+  },
 ];
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-linear-to-b from-slate-950 via-slate-900 to-slate-950">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-900/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-md items-center gap-4 px-4 py-4">
@@ -57,25 +81,23 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Products List */}
+          <div className="space-y-4">
             {pumpProducts.map((product, index) => (
               <div
                 key={index}
                 className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all hover:border-amber-500/30 hover:bg-white/10"
               >
                 {/* Product Image */}
-                <div className="relative aspect-square w-full overflow-hidden bg-slate-800">
+                <div className="w-full overflow-hidden bg-slate-800">
                   <Image
+                    unoptimized={true}
                     src={product.image}
                     alt={`${product.name} ${product.model}`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    height={100}
+                    width={100}
+                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-110"
                   />
-                  {/* Litre Badge */}
-                  <div className="absolute right-2 top-2 rounded-full bg-amber-500/90 px-2 py-0.5 text-xs font-bold text-black">
-                    {product.litre}L
-                  </div>
                 </div>
 
                 {/* Product Info */}
@@ -90,7 +112,7 @@ export default function ProductsPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="rounded-2xl border border-white/10 bg-gradient-to-br from-amber-500/10 to-orange-500/5 p-6 text-center">
+        <section className="rounded-2xl border border-white/10 bg-linear-to-br from-amber-500/10 to-orange-500/5 p-6 text-center">
           <h3 className="mb-2 text-lg font-bold text-white">Interested in our products?</h3>
           <p className="mb-4 text-sm text-slate-400">
             Contact us for pricing, availability, and bulk orders.
