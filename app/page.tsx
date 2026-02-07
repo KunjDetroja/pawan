@@ -15,6 +15,7 @@ import {
   BankButton,
   LocationButton,
   ServicesButton,
+  ProductButton,
 } from "@/components";
 
 // Social links configuration
@@ -113,13 +114,14 @@ export default function Home() {
           />
           <BankButton bankDetails={bankDetails} />
           <LocationButton
-            address="FF-60, Samruddhi Bhavan, 3rd Floor"
+            address="FF-55, Samruddhi Bhavan, 3rd Floor"
             city="Opp. Bombay Petrol Pump, Gondal Road, Rajkot - 360002"
             embedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.859723318689!2d70.79667707533606!3d22.28330297969886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959ca126519b81f%3A0xd513a203a82dec4b!2sSamrudhi%20Bhawan!5e0!3m2!1sen!2sin!4v1770473441475!5m2!1sen!2sin"
             latitude={22.283303}
             longitude={70.799252}
           />
           <ServicesButton />
+          {/* <ProductButton /> */}
         </div>
 
         {/* Save Contact Card */}

@@ -23,3 +23,4 @@ export { PhoneCard } from "./PhoneCard";
 export { BankButton } from "./BankButton";
 export { LocationButton } from "./LocationButton";
 export { ServicesButton } from "./ServicesButton";
+export { ProductButton } from "./ProductButton";
