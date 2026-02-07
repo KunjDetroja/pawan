@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/* Custom Theme Variables */
+:root {
+  --primary: #135bec;
+  --background-light: #f6f6f8;
+  --background-dark: #0f172a;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-background: var(--background-dark);
+  --color-foreground: #ededed;
+  --font-display: "Inter", sans-serif;
+}
+
+/* Custom Mesh Gradient Background */
+.mesh-gradient {
+  background-color: #0f172a;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(222, 85%, 60%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(263, 70%, 50%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(220, 74%, 48%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(260, 60%, 55%, 0.1) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.glass-card:active {
+  background: rgba(30, 41, 59, 0.6);
+  transform: scale(0.98);
+  transition: all 0.1s ease;
+}
+
+.glass-dock {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hide scrollbar for clean look */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Body minimum height */
+body {
+  min-height: max(884px, 100dvh);
+}
+
+/* Selection styling */
+::selection {
+  background-color: #135bec;
+  color: white;
+}
