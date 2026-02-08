@@ -72,7 +72,7 @@ export default function Home() {
       />
 
       {/* Main Content: Bento Grid */}
-      <main className="mx-auto w-full max-w-md space-y-3 px-4">
+      <main className="mx-auto w-full max-w-md space-y-3 px-4 pb-24">
 
         {/* 2 Column Grid for Primary Actions */}
         <div className="grid grid-cols-2 gap-3">

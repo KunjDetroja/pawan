@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Modal } from "./Modal";
 
 interface Service {
   name: string;
   icon: string;
+  slug: string;
+  hasProducts: boolean;
 }
 
 interface ServicesCardProps {
@@ -17,17 +20,17 @@ interface ServicesCardProps {
 }
 
 const defaultServices: Service[] = [
-  { name: "Air Compressor", icon: "air" },
-  { name: "Service Pump", icon: "water_pump" },
-  { name: "Electric Blower", icon: "mode_fan" },
-  { name: "Oil Level Indicator", icon: "oil_barrel" },
-  { name: "Vulcanizing Machine", icon: "local_fire_department" },
-  { name: "Electric Motor", icon: "electric_meter" },
-  { name: "Workshop Machinery", icon: "precision_manufacturing" },
-  { name: "Wood Working Machinery", icon: "carpenter" },
-  { name: "Electric Machinery", icon: "electric_bolt" },
-  { name: "Spares & Parts", icon: "settings" },
-  { name: "Repairing & Jobwork", icon: "build" },
+  { name: "Air Compressor", icon: "air", slug: "air-compressor", hasProducts: true },
+  { name: "Service Pump", icon: "water_pump", slug: "water-pump", hasProducts: true },
+  { name: "Electric Blower", icon: "mode_fan", slug: "electric-blower", hasProducts: false },
+  { name: "Oil Level Indicator", icon: "oil_barrel", slug: "oil-level-indicator", hasProducts: false },
+  { name: "Vulcanizing Machine", icon: "local_fire_department", slug: "vulcanizing-machine", hasProducts: false },
+  { name: "Electric Motor", icon: "electric_meter", slug: "electric-motor", hasProducts: false },
+  { name: "Workshop Machinery", icon: "precision_manufacturing", slug: "workshop-machinery", hasProducts: false },
+  { name: "Wood Working Machinery", icon: "carpenter", slug: "wood-working-machinery", hasProducts: false },
+  { name: "Electric Machinery", icon: "electric_bolt", slug: "electric-machinery", hasProducts: false },
+  { name: "Spares & Parts", icon: "settings", slug: "spares-parts", hasProducts: false },
+  { name: "Repairing & Jobwork", icon: "build", slug: "repairing-jobwork", hasProducts: false },
 ];
 
 export function ServicesCard({
@@ -37,11 +40,23 @@ export function ServicesCard({
   backgroundImage,
 }: ServicesCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
+  const handleServiceClick = (service: Service) => {
+    if (service.hasProducts) {
+      setIsOpen(false);
+      // Small delay to allow modal to close before navigation
+      setTimeout(() => {
+        router.push(`/products?category=${service.slug}`);
+      }, 100);
+    }
+  };
 
   return (
     <>
       {/* Services Trigger Card */}
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
         className="glass-card relative w-full overflow-hidden rounded-2xl p-5 text-left transition-all hover:bg-white/5"
       >
@@ -91,15 +106,35 @@ export function ServicesCard({
         {/* Services List */}
         <div className="space-y-3">
           {services.map((service, index) => (
-            <div
+            <button
               key={index}
-              className="flex items-center gap-3 rounded-xl bg-white/5 p-4 transition-colors hover:bg-white/10"
+              type="button"
+              onClick={() => handleServiceClick(service)}
+              className={`flex w-full items-center gap-3 rounded-xl p-4 text-left transition-all ${
+                service.hasProducts
+                  ? "cursor-pointer bg-white/5 hover:bg-white/10 hover:border-primary/30 border border-transparent"
+                  : "cursor-default bg-white/2 opacity-60"
+              }`}
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
+              <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${
+                service.hasProducts ? "bg-primary/20 text-primary" : "bg-slate-700/50 text-slate-500"
+              }`}>
                 <span className="material-symbols-outlined">{service.icon}</span>
               </div>
-              <p className="font-medium text-white">{service.name}</p>
-            </div>
+              <div className="flex-1">
+                <p className={`font-medium ${service.hasProducts ? "text-white" : "text-slate-400"}`}>
+                  {service.name}
+                </p>
+                {service.hasProducts ? (
+                  <p className="text-xs text-primary/70">View Products →</p>
+                ) : (
+                  <p className="text-xs text-slate-500">Coming Soon</p>
+                )}
+              </div>
+              {service.hasProducts && (
+                <span className="material-symbols-outlined text-primary/50 text-[20px]">chevron_right</span>
+              )}
+            </button>
           ))}
         </div>
 

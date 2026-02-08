@@ -16,7 +16,7 @@ export function ProfileHeader({
   imageUrl,
 }: ProfileHeaderProps) {
   return (
-    <header className="relative flex flex-col items-center px-6 pb-6 pt-12">
+    <header className="relative flex flex-col items-center px-6 pb-6 pt-6">
       {/* Profile Image with Glow Effect */}
       <div className="group relative">
         <div className="absolute -inset-0.5 rounded-full" />

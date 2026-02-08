@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Modal } from "./Modal";
 
 interface Service {
   name: string;
   icon: string;
+  slug: string;
+  hasProducts: boolean;
 }
 
 interface ServicesButtonProps {
@@ -49,17 +52,17 @@ const colorSchemes = {
 };
 
 const defaultServices: Service[] = [
-  { name: "Air Compressor", icon: "air" },
-  { name: "Service Pump", icon: "water_pump" },
-  { name: "Electric Blower", icon: "mode_fan" },
-  { name: "Oil Level Indicator", icon: "oil_barrel" },
-  { name: "Vulcanizing Machine", icon: "local_fire_department" },
-  { name: "Electric Motor", icon: "electric_meter" },
-  { name: "Workshop Machinery", icon: "precision_manufacturing" },
-  { name: "Wood Working Machinery", icon: "carpenter" },
-  { name: "Electric Machinery", icon: "electric_bolt" },
-  { name: "Spares & Parts", icon: "settings" },
-  { name: "Repairing & Jobwork", icon: "build" },
+  { name: "Air Compressor", icon: "air", slug: "air-compressor", hasProducts: true },
+  { name: "Service Pump", icon: "water_pump", slug: "water-pump", hasProducts: true },
+  { name: "Electric Blower", icon: "mode_fan", slug: "electric-blower", hasProducts: false },
+  { name: "Oil Level Indicator", icon: "oil_barrel", slug: "oil-level-indicator", hasProducts: false },
+  { name: "Vulcanizing Machine", icon: "local_fire_department", slug: "vulcanizing-machine", hasProducts: false },
+  { name: "Electric Motor", icon: "electric_meter", slug: "electric-motor", hasProducts: false },
+  { name: "Workshop Machinery", icon: "precision_manufacturing", slug: "workshop-machinery", hasProducts: false },
+  { name: "Wood Working Machinery", icon: "carpenter", slug: "wood-working-machinery", hasProducts: false },
+  { name: "Electric Machinery", icon: "electric_bolt", slug: "electric-machinery", hasProducts: false },
+  { name: "Spares & Parts", icon: "settings", slug: "spares-parts", hasProducts: false },
+  { name: "Repairing & Jobwork", icon: "build", slug: "repairing-jobwork", hasProducts: false },
 ];
 
 // Services icon component - Tools representing industrial machinery & services
@@ -79,12 +82,24 @@ export function ServicesButton({
   colorScheme = "purple",
 }: ServicesButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const colors = colorSchemes[colorScheme];
+
+  const handleServiceClick = (service: Service) => {
+    if (service.hasProducts) {
+      setIsOpen(false);
+      // Small delay to allow modal to close before navigation
+      setTimeout(() => {
+        router.push(`/products?category=${service.slug}`);
+      }, 100);
+    }
+  };
 
   return (
     <>
       {/* Services Trigger Button */}
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
         className="glass-card group relative flex flex-col items-start gap-3 overflow-hidden rounded-2xl p-4 text-left transition-all hover:bg-white/5"
       >
@@ -116,15 +131,17 @@ export function ServicesButton({
         {/* Services List */}
         <div className="space-y-3">
           {services.map((service, index) => (
-            <div
+            <button
               key={index}
-              className="flex items-center gap-3 rounded-xl bg-white/5 p-4 transition-colors hover:bg-white/10"
+              type="button"
+              onClick={() => handleServiceClick(service)}
+              className="flex w-full items-center gap-3 rounded-xl bg-white/5 p-4 text-left transition-all hover:bg-white/10 cursor-pointer"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20 text-purple-400">
                 <span className="material-symbols-outlined">{service.icon}</span>
               </div>
               <p className="font-medium text-white">{service.name}</p>
-            </div>
+            </button>
           ))}
         </div>
 
