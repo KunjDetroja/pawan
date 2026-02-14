@@ -21,7 +21,6 @@ interface AirCompressor {
   tank: string;
   litre: string;
   pound: string;
-  motor: string;
   piston: string;
   oil: string;
   weight: string;
@@ -46,7 +45,6 @@ const airCompressorProducts: AirCompressor[] = [
     tank: "12*30",
     litre: "60",
     pound: "200",
-    motor: "Crompton",
     piston: "Single",
     oil: "220 no",
     weight: "60 kg",
@@ -61,7 +59,6 @@ const airCompressorProducts: AirCompressor[] = [
     tank: "15*36",
     litre: "100",
     pound: "300",
-    motor: "Crompton",
     piston: "Single",
     oil: "220 no",
     weight: "115 kg",
@@ -76,7 +73,6 @@ const airCompressorProducts: AirCompressor[] = [
     tank: "10*28",
     litre: "40",
     pound: "150",
-    motor: "Crompton",
     piston: "Double",
     oil: "220 no",
     weight: "50 kg",
@@ -91,7 +87,6 @@ const airCompressorProducts: AirCompressor[] = [
     tank: "12*30",
     litre: "60",
     pound: "200",
-    motor: "Crompton",
     piston: "Double",
     oil: "220 no",
     weight: "128 kg",
@@ -106,7 +101,6 @@ const airCompressorProducts: AirCompressor[] = [
     tank: "15*36",
     litre: "100",
     pound: "300",
-    motor: "Crompton",
     piston: "Double",
     oil: "220 no",
     weight: "60 kg",
@@ -121,7 +115,6 @@ const airCompressorProducts: AirCompressor[] = [
     tank: "18*36",
     litre: "150",
     pound: "300",
-    motor: "Crompton",
     piston: "Double",
     oil: "220 no",
     weight: "90 kg",
@@ -136,7 +129,6 @@ const airCompressorProducts: AirCompressor[] = [
     tank: "16-36",
     litre: "130",
     pound: "300",
-    motor: "Crompton",
     piston: "Double",
     oil: "220 no",
     weight: "-",
@@ -515,10 +507,6 @@ function ProductsContent() {
                           <div className="rounded-lg bg-white/5 p-2">
                             <p className="text-[10px] uppercase text-slate-500">Piston</p>
                             <p className="text-sm font-semibold text-white">{product.piston}</p>
-                          </div>
-                          <div className="rounded-lg bg-white/5 p-2">
-                            <p className="text-[10px] uppercase text-slate-500">Motor</p>
-                            <p className="text-sm font-semibold text-white">{product.motor}</p>
                           </div>
                           <div className="rounded-lg bg-white/5 p-2">
                             <p className="text-[10px] uppercase text-slate-500">Weight</p>
