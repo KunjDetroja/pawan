@@ -28,11 +28,19 @@ interface AirCompressor {
   category: string;
 }
 
+interface ElectricBlower {
+  image: string;
+  name: string;
+  model: string;
+  category: string;
+}
+
 // Category definitions for filter dropdown
 const categories = [
   { slug: "all", name: "All Products", icon: "apps" },
   { slug: "air-compressor", name: "Air Compressor", icon: "air" },
   { slug: "water-pump", name: "Service Pump", icon: "water_pump" },
+  { slug: "electric-blower", name: "Electric Blower", icon: "mode_fan" },
 ];
 
 // Air Compressor products data
@@ -137,6 +145,34 @@ const airCompressorProducts: AirCompressor[] = [
   },
 ];
 
+// Electric Blower products data
+const electricBlowerProducts: ElectricBlower[] = [
+  {
+    image: "/product/electric_blower/18.jpeg",
+    name: "Electric Blower",
+    model: "No. 18",
+    category: "electric-blower",
+  },
+  {
+    image: "/product/electric_blower/25.jpeg",
+    name: "Electric Blower",
+    model: "No. 25",
+    category: "electric-blower",
+  },
+  {
+    image: "/product/electric_blower/35.jpeg",
+    name: "Electric Blower",
+    model: "No. 35",
+    category: "electric-blower",
+  },
+  {
+    image: "/product/electric_blower/60.jpeg",
+    name: "Electric Blower",
+    model: "No. 60",
+    category: "electric-blower",
+  },
+];
+
 // Parse pump images to product data
 const pumpProducts: Product[] = [
   {
@@ -192,6 +228,7 @@ function ProductsContent() {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     pumps: true,
     airCompressors: true,
+    electricBlowers: true,
   });
 
   // Toggle section expand/collapse
@@ -207,6 +244,7 @@ function ProductsContent() {
     setExpandedSections({
       pumps: true,
       airCompressors: true,
+      electricBlowers: true,
     });
   };
 
@@ -215,6 +253,7 @@ function ProductsContent() {
     setExpandedSections({
       pumps: false,
       airCompressors: false,
+      electricBlowers: false,
     });
   };
 
@@ -242,14 +281,16 @@ function ProductsContent() {
   // Filter products based on selected category
   const showPumps = selectedCategory === "all" || selectedCategory === "water-pump";
   const showAirCompressors = selectedCategory === "all" || selectedCategory === "air-compressor";
+  const showElectricBlowers = selectedCategory === "all" || selectedCategory === "electric-blower";
 
   // Count total products
   const totalProducts =
     (showPumps ? pumpProducts.length : 0) +
-    (showAirCompressors ? airCompressorProducts.length : 0);
+    (showAirCompressors ? airCompressorProducts.length : 0) +
+    (showElectricBlowers ? electricBlowerProducts.length : 0);
 
   // Check if all sections are collapsed
-  const allCollapsed = !expandedSections.pumps && !expandedSections.airCompressors;
+  const allCollapsed = !expandedSections.pumps && !expandedSections.airCompressors && !expandedSections.electricBlowers;
 
   return (
     <div className="min-h-dvh bg-slate-950">
@@ -517,6 +558,61 @@ function ProductsContent() {
                             <p className="text-sm font-semibold text-emerald-300">{product.workingPressure}</p>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Electric Global Section */}
+        {showElectricBlowers && (
+          <section className="mt-4">
+            {/* Section Header - Clickable to toggle */}
+            <button
+              type="button"
+              onClick={() => toggleSection("electricBlowers")}
+              className="mb-4 flex w-full items-center gap-3 rounded-xl bg-white/5 p-3 text-left transition-all hover:bg-white/10"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/20 text-purple-400">
+                <span className="material-symbols-outlined">mode_fan</span>
+              </div>
+              <div className="flex-1">
+                <h2 className="text-lg font-bold text-white">Electric Blowers</h2>
+                <p className="text-sm text-slate-400">{electricBlowerProducts.length} products</p>
+              </div>
+              <span className={`material-symbols-outlined text-slate-400 transition-transform duration-300 ${expandedSections.electricBlowers ? "rotate-180" : ""}`}>
+                expand_more
+              </span>
+            </button>
+
+            {/* Electric Blower Products List - Collapsible */}
+            <div className={`grid transition-all duration-300 ease-in-out ${expandedSections.electricBlowers ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+              <div className="overflow-hidden">
+                <div className="space-y-4">
+                  {electricBlowerProducts.map((product, index) => (
+                    <div
+                      key={index}
+                      className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all hover:border-purple-500/30 hover:bg-white/10"
+                    >
+                      {/* Product Image */}
+                      <div className="w-full overflow-hidden bg-slate-800">
+                        <Image
+                          unoptimized={true}
+                          src={product.image}
+                          alt={`${product.name} ${product.model}`}
+                          height={100}
+                          width={100}
+                          className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </div>
+
+                      {/* Product Info */}
+                      <div className="p-4">
+                        <p className="text-lg font-bold text-white">{product.name}</p>
+                        <p className="text-sm font-medium text-purple-400">{product.model}</p>
                       </div>
                     </div>
                   ))}

@@ -54,7 +54,7 @@ const colorSchemes = {
 const defaultServices: Service[] = [
   { name: "Air Compressor", icon: "air", slug: "air-compressor", hasProducts: true },
   { name: "Service Pump", icon: "water_pump", slug: "water-pump", hasProducts: true },
-  { name: "Electric Blower", icon: "mode_fan", slug: "electric-blower", hasProducts: false },
+  { name: "Electric Blower", icon: "mode_fan", slug: "electric-blower", hasProducts: true },
   { name: "Oil Level Indicator", icon: "oil_barrel", slug: "oil-level-indicator", hasProducts: false },
   { name: "Vulcanizing Machine", icon: "local_fire_department", slug: "vulcanizing-machine", hasProducts: false },
   { name: "Electric Motor", icon: "electric_meter", slug: "electric-motor", hasProducts: false },
