@@ -491,7 +491,7 @@ function ProductsContent() {
             <button
               type="button"
               onClick={() => toggleSection("airCompressors")}
-              className="mb-4 flex w-full items-center gap-3 rounded-xl bg-white/5 p-3 text-left transition-all hover:bg-white/10"
+              className="flex w-full items-center gap-3 rounded-xl bg-white/5 p-3 text-left transition-all hover:bg-white/10"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
                 <span className="material-symbols-outlined">air</span>
@@ -574,7 +574,7 @@ function ProductsContent() {
             <button
               type="button"
               onClick={() => toggleSection("electricBlowers")}
-              className="mb-4 flex w-full items-center gap-3 rounded-xl bg-white/5 p-3 text-left transition-all hover:bg-white/10"
+              className="flex w-full items-center gap-3 rounded-xl bg-white/5 p-3 text-left transition-all hover:bg-white/10"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/20 text-purple-400">
                 <span className="material-symbols-outlined">mode_fan</span>
