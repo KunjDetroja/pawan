@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -8,10 +8,9 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  title: "Satyam Enterprise",
-  description: "Distributor of Oil Level Indicator & Industrial Machinery Solutions.",
-};
+import { generateMetadata } from "@/lib/meta";
+
+export const metadata = generateMetadata("/");
 
 export default function RootLayout({
   children,
