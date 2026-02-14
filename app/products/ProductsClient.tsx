@@ -512,7 +512,7 @@ function ProductsContent() {
                             <p className="text-[10px] uppercase text-slate-500">Weight</p>
                             <p className="text-sm font-semibold text-white">{product.weight}</p>
                           </div>
-                          <div className="col-span-2 rounded-lg bg-emerald-500/10 p-2">
+                          <div className="rounded-lg bg-emerald-500/10 p-2">
                             <p className="text-[10px] uppercase text-emerald-400">Working Pressure</p>
                             <p className="text-sm font-semibold text-emerald-300">{product.workingPressure}</p>
                           </div>
